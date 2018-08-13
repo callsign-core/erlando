@@ -18,6 +18,10 @@
 -export([test/2]).
 -compile({parse_transform, do}).
 
+-ifdef(OTP_RELEASE).
+-compile({nowarn_deprecated_function, [{erlang, get_stacktrace, 0}]}).
+-endif.
+
 test(Funs, Options) ->
     ErrorT = error_t:new(identity_m),
     Result = ErrorT:run(test_funs(ErrorT, Funs)),
